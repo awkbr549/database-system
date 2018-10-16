@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Professor Details</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet"
+	  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script
+       src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script
+       src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <a href="/students/" style="float: right">Back</a>
+    <div align="center"><p>&nbsp;</p></div>
+    <div align="center">
+      <h2>Student Details</h2>
+
+      <table border="1">
+	<tr>
+	  <td align="right">Id:</td>
+	  <td align="center" th:text="${student.sid}"></td>
+	</tr>
+	<tr>
+	  <td align="right"> First Name: </td>
+	  <td align="center" th:text="${student.fname}"></td>
+	</tr>
+	<tr>
+	  <td align="right"> Last Name: </td>
+	  <td align="center" th:text="${student.lname}"></td>
+	</tr>
+	<tr>
+	  <td align="right"> Date of Birth (YYYY-MM-DD): </td>
+	  <td align="center" th:text="${student.dob}"></td>
+	</tr>
+	<tr>
+	  <td align="right"> Gender (M/F): </td>
+	  <td align="center" th:text="${student.gender}"></td>
+	</tr>
+	<tr>
+	  <td align="right"> Email: </td>
+	  <td align="center" th:text="${student.email}"></td>
+	</tr>
+	<tr>
+	  <td align="right"> Street: </td>
+	  <td align="center" th:text="${student.street}"></td>
+	</tr>
+	<tr>
+	  <td align="right"> City: </td>
+	  <td align="center" th:text="${student.city}"></td>
+	</tr>
+	<tr>
+	  <td align="right"> State (SS): </td>
+	  <td align="center" th:text="${student.state}"></td>
+	</tr>
+	<tr>
+	  <td align="right"> Zip (ZZZZZ): </td>
+	  <td align="center" th:text="${student.zip}"></td>
+	</tr>
+	<tr>
+	  <td align="right"> Departments/Majors: </td>
+	  <td></td>
+	</tr>
+	<tr th:each="sdm: ${sdmList}">
+	  <td align="right"
+	      th:text="${sdm.getSdmId().getDepartment().getDname()}" />
+	  <td align="center" th:text="${scg.getMajor()}" />
+	</tr>
+	<tr>
+	  <td align="right"> Courses/Grades: </td>
+	  <td></td>
+	</tr>
+	<tr th:each="scg : ${scgList}">
+	  <td align="right"
+	      th:text="${scg.getScgId().getCourse().getCname()}" />
+	  <td align="center" th:text="${scg.getGrade()}" />
+	</tr>
+      </table>
+      <br />
+    </div>
+  </body>
+</html>

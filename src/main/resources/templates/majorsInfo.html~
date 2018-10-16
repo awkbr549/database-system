@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Majors Details</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet"
+	  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script
+       src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script
+       src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <a href="/majors/" style="float: right">Back</a>
+    <div align="center"><p>&nbsp;</p></div>
+    <div align="center">
+      <table border="1">
+	<tr>
+	  <td align="right">Student ID:</td>
+	  <td th:text="${sdm.getSdmId().getStudent().getSid()}"></td>
+	</tr>
+	<tr>
+	  <td align="right">Student Name:</td>
+	  <td th:text="${sdm.getSdmId().getStudent().getFname()} + ' ' + ${sdm.getSdmId().getStudent().getLname()}"></td>
+	</tr>
+	
+	<tr>
+	  <td align="right">Department ID:</td>
+	  <td th:text="${sdm.getSdmId().getDepartment().getDid()}"></td>
+	</tr>
+	<tr>
+	  <td align="right">Department Name:</td>
+	  <td th:text="${sdm.getSdmId().getDepartment().getDname()}"></td>
+	</tr>
+	<tr>
+	  <td align="right">Major:</td>
+	  <td th:text="${sdm.getMajor()}" colspan="4"></td>
+	</tr>
+      </table>
+    </div>
+  </body>
+</html>

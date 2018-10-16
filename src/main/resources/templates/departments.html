@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>View Department</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<a href="/" style="float: right">Back</a>
+	<div align="center">
+		<h2>Department Form</h2>
+		<form action="#" th:action="@{/departments}" th:object="${dept}"
+			method="post">
+			<p th:text="${insertmessage}" />
+			<table border="1">
+				<tr>
+					<td align="right">Department name*:</td>
+					<td><input type="text" th:field="*{deptName}" /></td>
+				</tr>
+				<tr>
+					<td align="right">Description:</td>
+					<td><input type="text" th:field="*{deptDesc}" /></td>
+				</tr>
+				<tr>
+
+					<td align="center" colspan="2"><input type="submit"
+						value="Submit" /> <input type="reset" value="Reset" /></td>
+				</tr>
+				<tr>
+					<td align="center" colspan="2">
+						<p th:if="${#fields.hasErrors('deptName')}"
+							th:errors="*{deptName}" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<br />
+
+	<div align="center">
+		<h2>List of Departments</h2>
+		<p th:text="${modmessage}" />
+		<table border="1" width="70%">
+			<tr>
+				<th width="10%">Dept ID</th>
+				<th width="20%">Department Name</th>
+				<th width="20%">Description</th>
+				<th width="15%">Options</th>
+			</tr>
+			<tr th:each="dept: ${deptList}">
+				<td th:text="${dept.did}" />
+				<td th:text="${dept.deptName}" />
+				<td th:text="${dept.deptDesc}" />
+				
+				<td>
+					<button type="button" class="btn btn-link"
+						th:onclick="'info(' + ${dept.did} + ')'">Info</button>
+					<button type="button" class="btn btn-link"
+						th:onclick="'update(' + ${dept.did} + ')'">Update</button>
+				</td>
+			</tr>
+		</table>
+		
+		<script>
+			function info(did) {
+				window.location.href = "/departments/info?did=" + did;
+			} //info
+
+			function update(did) {
+				window.location.href = "/departments/update?did=" + did;
+			} //update
+		</script>
+		
+	</div>
+</body>
+</html>

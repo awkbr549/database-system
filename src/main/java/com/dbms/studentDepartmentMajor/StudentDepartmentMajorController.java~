@@ -1,0 +1,35 @@
+package com.dbms.studentDepartmentMajor;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.dbms.student.Student;
+import com.dbms.student.StudentRepository;
+import com.dbms.course.Department;
+import com.dbms.course.DepartmentRepository;
+
+@Controler
+public class StudentDepartmentMajorController {
+    @Autowired
+    private StudentDepartmentMajorRepository sdmRepo;
+
+    @Autowired
+    private StudentRepository studentRepo;
+
+    @Autowired
+    private DepartmentRepository departmentRepo;
+
+    @GetMapping("/majors")
+    public String sdmForm(Model model) {
+	model.addAttribute("sdmQ", new StudentDepartmentMajor());
+	model.addAttribute("sdmList", sdmRepo.findAllByOrderBySdmIdAsc());
+	return "majors";
+    } //sdmForm
+
+    
+} //StudentDepartmentMajorController

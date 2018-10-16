@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>View Students</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet"
+	  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script
+       src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script
+       src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    
+    <a href="/" style="float: right">Home</a>
+    <div align="center">
+      <h2>Student Form</h2>
+      <form action="#" th:action="@{/students/}" th:object="${studentQ}"
+	    method="post">
+	<p th:text="${insertmessage}" />
+	<table border="1">
+	  <tr>
+	    <td align="right">Date of Birth (YYYY-MM-DD):</td>
+	    <td><input type="text" th:field="*{dob}" /></td>
+	  </tr>
+	  <tr>
+	    <td align="right">First Name:</td>
+	    <td><input type="text" th:field="*{fname}" /></td>
+	  </tr>
+	  <tr>
+	    <td align="right">Last Name:</td>
+	    <td><input type="text" th:field="*{lname}" /></td>
+	  </tr>
+	  <tr>
+	    <td align="right">Gender (M/F):</td>
+	    <td><input type="text" th:field="*{gender}" /></td>
+	  </tr>
+	  <tr>
+	    <td align="right">Email:</td>
+	    <td><input type="text" th:field="*{email}" /></td>
+	  </tr>
+	  <tr>
+	    <td align="right">Street:</td>
+	    <td><input type="text" th:field="*{street}" /></td>
+	  </tr>
+	  <tr>
+	    <td align="right">City:</td>
+	    <td><input type="text" th:field="*{city}" /></td>
+	  </tr>
+	  <tr>
+	    <td align="right">State (SS):</td>
+	    <td><input type="text" th:field="*{state}" /></td>
+	  </tr>
+	  <tr>
+	    <td align="right">Zip (ZZZZZ):</td>
+	    <td><input type="text" th:field="*{zip}" /></td>
+	  </tr>
+	  <tr>
+	    <td align="right">Residency (citizen, national, visa, other):</td>
+	    <td><input type="text" th:field="*{residency}" /></td>
+	  </tr>
+	  <tr>
+
+	    <td align="center" colspan="2"><input type="submit"
+						  value="Submit" /> <input type="reset" value="Reset" /></td>
+	  </tr>
+	</table>
+      </form>
+    </div>
+    <br />
+
+    <div align="center">
+      <h2>List of Courses</h2>
+      <p th:text="${modmessage}" />
+      <table border="1"  width="85%">
+	<tr>
+	  <th width="5%">ID</th>
+	  <th width="5%">DoB</th>
+	  <th width="5%">First</th>
+	  <th width="5%">Last</th>
+	  <th width="5%">Gender</th>
+	  <th width="5%">Email</th>
+	  <th width="5%">Street</th>
+	  <th width="5%">City</th>
+	  <th width="5%">State</th>
+	  <th width="5%">Zip</th>
+	  <th width="5%">Residency</th>
+	  <th width="15%">Options</th>
+	</tr>
+	<tr th:each="student: ${studentList}">
+	  <td th:text="${student.sid}" />
+	  <td th:text="${student.dob}" />
+	  <td th:text="${student.fname}" />
+	  <td th:text="${student.lname}" />
+	  <td th:text="${student.gender}" />
+	  <td th:text="${student.email}" />
+	  <td th:text="${student.street}" />
+	  <td th:text="${student.city}" />
+	  <td th:text="${student.state}" />
+	  <td th:text="${student.zip}" />
+	  <td th:text="${student.residency}" />
+
+	  <td>
+	    <button class="btn btn-link" th:onclick="'info(' + ${student.sid} + ')'">Info</button>
+	    <button class="btn btn-link" th:onclick="'update(' + ${student.sid} + ')'">
+	      Update</button>
+	    <button class="btn btn-link" th:onclick="'confirmDelete(' + ${student.sid} + ')'">
+	      Delete</button>
+	  </td>
+	</tr>
+      </table>
+
+      <script>
+	function info(sid) {
+	window.location.href = "/students/info?sid=" + sid;
+	} //info
+
+	function update(sid) {
+	window.location.href = "/students/update?sid=" + sid;
+	} //update
+
+	function confirmDelete(sid) {
+	if (confirm("Remove student " + sid + "?") == true) {
+	window.location.href = "/students/delete?sid=" + sid;
+	} //if
+	} //confirmDelete
+      </script>
+    </div>
+  </body>
+</html>

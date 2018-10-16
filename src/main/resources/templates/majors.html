@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>View Students &#38; Majors</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet"
+	  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script
+       src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script
+       src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <a href="/" style="float: right">Home</a>
+    <div align="center">
+      <h2>Majors Form</h2>
+      <form action="#" th:action="@{/majors/}" th:object="${sdmQ}"
+	    method="post">
+	<table border="1">
+	  <tr>
+	    <td align="right">&#42;Department ID:</td>
+	    <td><input type="text" th:field="*{sdmId.department.did}" /></td>
+	  </tr>
+	  <tr>
+	    <td align="right">&#42;Student ID:</td>
+	    <td><input type="text" th:field="*{sdmId.student.sid}" /></td>
+	  </tr>
+	  <tr>
+	    <td align="right">Major:</td>
+	    <td><input type="text" th:field="*{major}" /></td>
+	  </tr>
+	  <tr>
+	    <td align="center" colspan="2">
+	      <input type="submit" value="Submit" />
+	      <input type="reset" value="Reset" />
+	    </td>
+	  </tr>
+	</table>
+      </form>
+    </div>
+
+    <div align="center">
+      <h2>Current Majors</h2>
+      <table border="1">
+	<tr>
+	  <th>Department ID</th>
+	  <th>Student Id</th>
+	  <th>Major</th>
+	</tr>
+	<tr th:each="sdm : ${sdmList}">
+	  
+	  <td th:text="${sdm.getSdmId().getDepartment().getDid()}" />
+	  <td th:text="${sdm.getSdmId().getStudent().getSid()}" />
+	  <td th:text="${sdm.getMajor()}" />
+	  <td>
+	    <button class="btn btn-link"
+		    th:onclick="'info(' + ${sdm.getSdmId().getStudent().getSid()} + ', ' + ${sdm.getSdmId().getDepartment().getDid()} + ')'">
+	      Info
+	    </button>
+	    <!--
+	    <button class="btn btn-link"
+		    th:onclick="'update(' + ${sdm.getSdmId().getStudent().getSid()} + ', ' + ${sdm.getSdmId().getDepartment().getDid()} + ')'">
+	      Update
+	    </button>-->	    
+	    <button class="btn btn-link"
+		    th:onclick="'confirmDelete(' + ${sdm.getSdmId().getStudent().getSid()} + ', ' + ${sdm.getSdmId().getDepartment().getDid()} + ')'">
+	      Delete
+	    </button>
+	  </td>
+	</tr>
+
+      </table>
+    </div>
+
+    <script>
+      function info(sid, did) {
+      window.location.href = "/majors/info?did=" + did + "\u0026sid=" + sid;
+      } //info
+
+      function update(sid, did) {
+      window.location.href = "/majors/update?did=" + did + "\u0026sid=" + sid;
+      } //info
+      
+      function confirmDelete(sid, did) {
+      if (confirm("Remove major with department " + did + " and student " + sid + "?") == true) {
+      window.location.href = "/majors/delete?did=" + did + "\u0026sid=" + sid;
+      } //if
+      } //confirmDelete
+    </script>
+  </body>
+</html>

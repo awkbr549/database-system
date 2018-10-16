@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Course Info</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<a href="/courses" style="float: right">Back</a>
+	<div align="center">
+		<h2>Course Details</h2>
+
+		<table border="1">
+			<tr>
+				<td align="right">Course Id:</td>
+				<td th:text="${course.cid}"></td>
+			</tr>
+			<tr>
+				<td align="right">Course Number:</td>
+				<td th:text="${course.cnumber}"></td>
+			</tr>
+			<tr>
+				<td align="right">Course Name:</td>
+				<td th:text="${course.cname}"></td>
+			</tr>
+			<tr>
+				<td align="right">Description:</td>
+				<td th:text="${course.description}"></td>
+			</tr>
+			<tr>
+				<td align="right">Credits:</td>
+				<td th:text="${course.credits}"></td>
+			</tr>
+			<tr>
+				<td align="right">Semester:</td>
+				<td th:text="${course.semester}"></td>
+			</tr>
+			<tr>
+				<td align="right">Department:</td>
+				<td th:text="${dInfo.deptName}"></td>
+			</tr>
+			<tr>
+				<td align="right">Taught by:</td>
+				<td th:text="${pInfo.fname} +' '+${pInfo.lname}"></td>
+			</tr>
+		</table>
+		<br />
+	</div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Professor Details</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet"
+	  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script
+       src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script
+       src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <a href="/registration/" style="float: right">Back</a>
+    <div align="center"><p>&nbsp;</p></div>
+    <div align="center">
+      <h2>Update Registration</h2>
+      <form action="#"
+	    th:action="@{/registration/update/}"
+	    th:object="${scgQ}"
+	    method="post">
+	
+	    <!--th:object="${scgQ}"-->
+	<table border="1">
+	  <tr>
+	    <td align="right">Student ID:</td>
+	    <td th:text="${scg.getScgId().getStudent().getSid()}" />
+	      <!--<input type="text"
+		     th:value="${scg.getScgId().getStudent().getSid()}"
+		     th:name="sid"
+		     th:id="sid"
+		     readonly="readonly" />
+		     <!-th:field="*{scgId.student.sid}"--><!--
+	    </td>-->
+	  </tr>
+	  <tr>
+	    <td align="right">Student Name:</td>
+	    <td th:text="${scg.getScgId().getStudent().getFname()} + ' ' + ${scg.getScgId().getStudent().getLname()}">
+	    </td>
+	  </tr>
+	  
+	  <tr>
+	    <td align="right">Course ID:</td>
+	    <td th:text="${scg.getScgId().getCourse().getCid()}" />
+	      <!--<input type="text"
+		     th:value="${scg.getScgId().getCourse().getCid()}"
+		     th:name="cid"
+		     th:id="cid"
+		     readonly="readonly" />
+		     <!-th:field="*{scgId.course.cid}"--><!--
+	    </td>-->
+	  </tr>
+	  <tr>
+	    <td align="right">Course Name:</td>
+	    <td th:text="${scg.getScgId().getCourse().getCname()}"></td>
+	  </tr>
+	  <tr>
+	    <td align="right">Grade:</td>
+	    <td>
+	      <input  type="text" th:field="*{grade}" />
+		      <!--th:value="${scg.getGrade()}"
+		      th:name="grade"
+		      th:id="grade"/>-->
+	    </td>
+	  </tr>
+	  <tr>
+	    <td align="center" colspan="2">
+	      <input type="submit" value="Submit" />
+	      <input type="reset" value="Reset"/>
+	      <button type="button" th:onclick="'cancel()'">Cancel</button>
+	    </td>
+	  </tr>
+	</table>
+      </form>
+    </div>
+
+    <script>
+      function cancel() {
+      window.location.href = "/registration/";
+      } //cancel
+    </script>
+  </body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>View Professors</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<a href="/" style="float: right">Back</a>
+	<div align="center">
+		<h2>Professor Form</h2>
+		<form action="#" th:action="@{/professors}" th:object="${prof}"
+			method="post">
+			<p th:text="${insertmessage}" />
+			<table border="1">
+				<tr>
+					<td align="right">First Name:</td>
+					<td><input type="text" th:field="*{fname}" /></td>
+				</tr>
+				<tr>
+					<td align="right">Last Name:</td>
+					<td><input type="text" th:field="*{lname}" /></td>
+				</tr>
+				<tr>
+					<td align="right">Date of Birth (YYYY-MM-DD):</td>
+					<td><input type="text" th:field="*{dob}" /></td>
+				</tr>
+				<tr>
+					<td align="right">Gender (M/F):</td>
+					<td><input type="text" th:field="*{gender}" /></td>
+				</tr>
+				<tr>
+					<td align="right">Email*:</td>
+					<td><input type="text" th:field="*{email}" /></td>
+				</tr>
+				<tr>
+					<td align="right">Street:</td>
+					<td><input type="text" th:field="*{street}" /></td>
+				</tr>
+				<tr>
+					<td align="right">City:</td>
+					<td><input type="text" th:field="*{city}" /></td>
+				</tr>
+				<tr>
+					<td align="right">State (SS):</td>
+					<td><input type="text" th:field="*{state}" /></td>
+					</tr>
+				<tr>
+					<td align="right">Zip (ZZZZZ):</td>
+					<td><input type="text" th:field="*{zip}" /></td>
+				</tr>
+				<tr>
+					<td align="right">Department*:</td>
+					<td><input type="text" th:field="*{deptId}" /></td>
+				</tr>
+				<tr>
+
+					<td align="center" colspan="2"><input type="submit"
+						value="Submit" /> <input type="reset" value="Reset" /></td>
+				</tr>
+				<tr>
+					<td align="center" colspan="2">
+						<p th:if="${#fields.hasErrors('fname')}" th:errors="*{fname}" />
+						<p th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" />
+						<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" />
+						<p th:if="${#fields.hasErrors('state')}" th:errors="*{state}" />
+						<p th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}" />
+						<p th:if="${#fields.hasErrors('deptId')}" th:errors="*{deptId}" />
+					</td>
+				</tr>
+			</table>
+		</form>
+		</div>
+		<br />
+		
+ 		<div align="center">
+		<h2>List of Professors</h2>
+		<p th:text="${modmessage}" />
+		<table border="1" width="72%">
+			<tr>
+				<th width="5%">ID</th>
+				<th width="5%">DoB</th>
+				<th width="5%">First</th>
+				<th width="5%">Last</th>
+				<th width="5%">Gender</th>
+				<th width="5%">Email</th>
+				<th width="5%">Street</th>
+				<th width="5%">City</th>
+				<th width="5%">State</th>
+				<th width="5%">Zip</th>
+				<th width="5%">Department</th>
+				<th width="15%">Options</th>
+			</tr>
+			<tr th:each="prof: ${profList}">
+				<td th:text="${prof.pid}" />
+				<td th:text="${prof.dob}" />
+				<td th:text="${prof.fname}" />
+				<td th:text="${prof.lname}" />
+				<td th:text="${prof.gender}" />
+				<td th:text="${prof.email}" />
+				<td th:text="${prof.street}" />
+				<td th:text="${prof.city}" />
+				<td th:text="${prof.state}" />
+				<td th:text="${prof.zip}" />
+				<td th:text="${prof.deptId}" />
+
+				<td>
+					<button type="button" class="btn btn-link"
+						th:onclick="'info(' + ${prof.pid} + ')'">Info</button>
+					<button type="button" class="btn btn-link"
+						th:onclick="'update(' + ${prof.pid} + ')'">Update</button>
+					<button type="button" class="btn btn-link"
+						th:onclick="'confirmDelete(' + ${prof.pid} + ')'">Delete
+					</button>
+				</td>
+			</tr>
+		</table>
+
+		<script>
+			function info(pid) {
+				window.location.href = "/professors/info?pid=" + pid;
+			} //info
+
+			function update(pid) {
+				window.location.href = "/professors/update?pid=" + pid;
+			} //update
+
+			function confirmDelete(pid) {
+				if (confirm("Remove professor with id:" + pid + "?") == true) {
+					window.location.href = "/professors/delete?pid=" + pid;
+				} //if
+			} //confirmDelete
+		</script>
+
+	</div>
+</body>
+</html>

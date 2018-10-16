@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Professor Details</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet"
+	  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script
+       src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script
+       src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <a href="/professors" style="float: right">Back</a>
+    <div align="center"><p>&nbsp;</p></div>
+    <div align="center">
+      <h2>Professor Details</h2>
+
+      <table border="1">
+	<tr>
+	  <td align="right">Id:</td>
+	  <td align="center" th:text="${prof.pid}"></td>
+	</tr>
+	<tr>
+	  <td align="right">First Name:</td>
+	  <td align="center" th:text="${prof.fname}"></td>
+	</tr>
+	<tr>
+	  <td align="right">Last Name:</td>
+	  <td align="center" th:text="${prof.lname}"></td>
+	</tr>
+	<tr>
+	  <td align="right">Date of Birth (YYYY-MM-DD):</td>
+	  <td align="center" th:text="${prof.dob}"></td>
+	</tr>
+	<tr>
+	  <td align="right">Gender (M/F):</td>
+	  <td align="center" th:text="${prof.gender}"></td>
+	</tr>
+	<tr>
+	  <td align="right">Email:</td>
+	  <td align="center" th:text="${prof.email}"></td>
+	</tr>
+	<tr>
+	  <td align="right">Street:</td>
+	  <td align="center" th:text="${prof.street}"></td>
+	</tr>
+	<tr>
+	  <td align="right">City:</td>
+	  <td align="center" th:text="${prof.city}"></td>
+	</tr>
+	<tr>
+	  <td align="right">State (SS):</td>
+	  <td align="center" th:text="${prof.state}"></td>
+	</tr>
+	<tr>
+	  <td align="right">Zip (ZZZZZ):</td>
+	  <td align="center" th:text="${prof.zip}"></td>
+	</tr>
+	<tr>
+	  <td align="right">Department Number:</td>
+	  <td align="center" th:text="${deptInfo.getDid()}"></td>
+	</tr>
+	<tr>
+	  <td align="right">Department Name:</td>
+	  <td align="center" th:text="${deptInfo.getDeptName()}"></td>
+	</tr>
+	<tr>
+	  <td align="right">Courses Taught:</td>
+	</tr>
+	<tr th:each="course : ${courseList}">
+	  <td></td>
+	  <td align="center" th:text="${course.getCname()}" />
+	</tr>
+      </table>
+      <br />
+    </div>
+  </body>
+</html>

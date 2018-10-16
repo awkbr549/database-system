@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Update Professors</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<div align="center">
+	<h2>Professor Update Form</h2>
+	<form action="#" th:action="@{/professors/update}" th:object="${profQ}"
+		method="post">
+		<table border="1">
+			<tr>
+				<td align="right">Id:</td>
+				<td><input type="text" name="pid" id="pid"
+					th:value="${currentProf.pid}" readonly="readonly" /></td>
+			</tr>
+			<tr>
+				<td align="right">Date of Birth (YYYY-MM-DD):</td>
+				<td><input type="text" name="dob" id="dob"
+					th:value="${currentProf.dob}" /></td>
+			</tr>
+			<tr>
+				<td align="right">First Name:</td>
+				<td><input type="text" name="fname" id="fname"
+					th:value="${currentProf.fname}" /></td>
+			</tr>
+			<tr>
+				<td align="right">Last Name:</td>
+				<td><input type="text" name="lname" id="lname"
+					th:value="${currentProf.lname}" /></td>
+			</tr>
+			<tr>
+				<td align="right">Gender (M/F):</td>
+				<td><input type="text" name="gender" id="gender"
+					th:value="${currentProf.gender}" /></td>
+			</tr>
+			<tr>
+				<td align="right">Email:</td>
+				<td><input type="text" name="email" id="email"
+					th:value="${currentProf.email}" /></td>
+			</tr>
+			<tr>
+				<td align="right">Street:</td>
+				<td><input type="text" name="street" id="street"
+					th:value="${currentProf.street}" /></td>
+			</tr>
+			<tr>
+				<td align="right">City:</td>
+				<td><input type="text" name="city" id="city"
+					th:value="${currentProf.city}" /></td>
+			</tr>
+			<tr>
+				<td align="right">State (SS):</td>
+				<td><input type="text" name="state" id="state"
+					th:value="${currentProf.state}" /></td>
+			</tr>
+			<tr>
+				<td align="right">Zip (ZZZZZ):</td>
+				<td><input type="text" name="zip" id="zip"
+					th:value="${currentProf.zip}" /></td>
+			</tr>
+			<tr>
+				<td align="right">Department:</td>
+				<td><input type="text" name="deptId" id="deptId"
+					th:value="${currentProf.deptId}" /></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2">
+					<input type="submit" value="Submit" />
+					<button type="button" th:onclick="'cancel()'">Cancel</button>
+					<!-- <button id="cancelButton">Cancel</button> --></td>
+			</tr>
+		</table>
+	</form>
+	<br />
+	<!-- <script type="text/javascript">
+		document.getElementById("cancelButton").onclick = function() {
+			location.href = "/professors";
+		};
+	</script> -->
+	<script>
+		function cancel() {
+			window.location.href = "/professors/";
+		}
+	</script>
+</div>
+</body>
+</html>

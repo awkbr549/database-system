@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>View Students &#38; Classes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet"
+	  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script
+       src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script
+       src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <a href="/" style="float: right">Home</a>
+    <div align="center">
+      <h2>Class Registration Form</h2>
+      <form action="#" th:action="@{/registration/}" th:object="${scgQ}"
+	    method="post">
+	<table border="1">
+	  <tr>
+	    <td align="right">&#42;Course ID:</td>
+	    <td><input type="text" th:field="*{scgId.course.cid}" /></td>
+	  </tr>
+	  <tr>
+	    <td align="right">&#42;Student ID:</td>
+	    <td><input type="text" th:field="*{scgId.student.sid}" /></td>
+	  </tr>
+	  <tr>
+	    <td align="right">Grade:</td>
+	    <td><input type="text" th:field="*{grade}" /></td>
+	  </tr>
+	  <tr>
+	    <td align="center" colspan="2">
+	      <input type="submit" value="Submit" />
+	      <input type="reset" value="Reset" />
+	    </td>
+	  </tr>
+	</table>
+      </form>
+    </div>
+
+    <div align="center">
+      <h2>Current Registrations</h2>
+      <table border="1">
+	<tr>
+	  <th>Course ID</th>
+	  <th>Student Id</th>
+	  <th>Grade</th>
+	</tr>
+	<tr th:each="scg: ${scgList}">
+	  
+	  <td th:text="${scg.getScgId().getCourse().getCid()}" />
+	  <td th:text="${scg.getScgId().getStudent().getSid()}" />
+	  <td th:text="${scg.grade}" />
+	  <td>
+	    <button class="btn btn-link"
+		    th:onclick="'info(' + ${scg.getScgId().getStudent().getSid()} + ', ' + ${scg.getScgId().getCourse().getCid()} + ')'">
+	      Info
+	    </button>
+	    <!--
+	    <button class="btn btn-link"
+		    th:onclick="'update(' + ${scg.getScgId().getStudent().getSid()} + ', ' + ${scg.getScgId().getCourse().getCid()} + ')'">
+	      Update
+	    </button>-->	    
+	    <button class="btn btn-link"
+		    th:onclick="'confirmDelete(' + ${scg.getScgId().getStudent().getSid()} + ', ' + ${scg.getScgId().getCourse().getCid()} + ')'">
+	      Delete
+	    </button>
+	  </td>
+	</tr>
+
+      </table>
+    </div>
+
+    <script>
+      function info(sid, cid) {
+      window.location.href = "/registration/info?cid=" + cid + "\u0026sid=" + sid;
+      } //info
+
+      function update(sid, cid) {
+      window.location.href = "/registration/update?cid=" + cid + "\u0026sid=" + sid;
+      } //info
+      
+      function confirmDelete(sid, cid) {
+      if (confirm("Remove registration with course " + cid + " and student " + sid + "?") == true) {
+      window.location.href = "/registration/delete?cid=" + cid + "\u0026sid=" + sid;
+      } //if
+      } //confirmDelete
+    </script>
+  </body>
+</html>

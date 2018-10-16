@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Update Department</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<div align="center">
+	<h2>Department Update Form</h2>
+	<form action="#" th:action="@{/departments/update}" th:object="${deptQ}"
+		method="post">
+		<table border="1">
+			<tr>
+				<td align="right">Id:</td>
+				<td><input type="text" name="did" id="did"
+					th:value="${currentDept.did}" readonly="readonly" /></td>
+			</tr>
+			<tr>
+				<td align="right">Department Name*:</td>
+				<td><input type="text" name="deptName" id="deptName"
+					th:value="${currentDept.deptName}" /></td>
+			</tr>
+			<tr>
+				<td align="right">Description:</td>
+				<td><input type="text" name="deptDesc" id="deptDesc"
+					th:value="${currentDept.deptDesc}" /></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2">
+					<input type="submit" value="Submit" />
+					<button type="button" th:onclick="'cancel()'">Cancel</button></td>
+			</tr>
+		</table>
+	</form>
+	<br />
+	
+	<script>
+		function cancel() {
+			window.location.href = "/departments/";
+		}
+	</script>
+</div>
+</body>
+</html>

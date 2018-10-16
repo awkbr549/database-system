@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>View Courses</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+
+<body>
+	<a href="/" style="float: right">Back</a>
+	<div align="center">
+		<h2>Course Form</h2>
+		<form action="#" th:action="@{/courses/}" th:object="${courseA}"
+			method="post">
+			<p th:text="${insertmessage}" />
+			<table border="1">
+				<tr>
+					<td align="right">Course Number:</td>
+					<td><input type="text" th:field="*{cnumber}" /></td>
+				</tr>
+				<tr>
+					<td align="right">Course Name:</td>
+					<td><input type="text" th:field="*{cname}" /></td>
+				</tr>
+				<tr>
+					<td align="right">Description:</td>
+					<td><input type="text" th:field="*{description}" /></td>
+				</tr>
+				<tr>
+					<td align="right">Credits:</td>
+					<td><input type="text" th:field="*{credits}" /></td>
+				</tr>
+				<tr>
+					<td align="right">Semester:</td>
+					<td><input type="text" th:field="*{semester}" /></td>
+				</tr>
+				<tr>
+					<td align="right">Department:</td>
+					<td><input type="text" th:field="*{did}" /></td>
+				</tr>
+				<tr>
+					<td align="right">Professor:</td>
+					<td><input type="text" th:field="*{pid}" /></td>
+				</tr>
+				<tr>
+
+					<td align="center" colspan="2"><input type="submit"
+						value="Submit" /> <input type="reset" value="Reset" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<br />
+
+	<div align="center">
+		<h2>List of Courses</h2>
+		<p th:text="${modmessage}" />
+		<table border="1" width="85%">
+			<tr>
+				<th width="8%">Course ID</th>
+				<th width="8%">Course Number</th>
+				<th width="8%">Name</th>
+				<th width="8%">Description</th>
+				<th width="8%">Credits</th>
+				<th width="8%">Semester</th>
+				<th width="8%">Department</th>
+				<th width="8%">Professor</th>
+				<th width="19%">Options</th>
+			</tr>
+			<tr th:each="course: ${courseList}">
+				<td th:text="${course.cid}" />
+				<td th:text="${course.cnumber}" />
+				<td th:text="${course.cname}" />
+				<td th:text="${course.description}" />
+				<td th:text="${course.credits}" />
+				<td th:text="${course.semester}" />
+				<td th:text="${course.did}" />
+				<td th:text="${course.pid}" />
+				<td>
+					<button type="button" class="btn btn-link"
+						th:onclick="'info(' + ${course.cid} + ')'">Info</button>
+					<button type="button" class="btn btn-link"
+						th:onclick="'update(' + ${course.cid} + ')'">Update</button>
+					<button type="button" class="btn btn-link"
+						th:onclick="'confirmDelete(' + ${course.cid} + ')'">Delete
+					</button>
+				</td>
+			</tr>
+		</table>
+
+		<script>
+			function info(cid) {
+				window.location.href = "/courses/info?cid=" + cid;
+			} //info
+
+			function update(cid) {
+				window.location.href = "/courses/update?cid=" + cid;
+			} //update
+
+			function confirmDelete(cid) {
+				if (confirm("Remove course with id:" + cid + "?") == true) {
+					window.location.href = "/courses/delete?cid=" + cid;
+				} //if
+			} //confirmDelete
+		</script>
+	</div>
+</body>
+</html>

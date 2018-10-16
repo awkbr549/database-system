@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Department Details</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<a href="/departments" style="float: right">Back</a>
+	<div align="center">
+		<h2>Department Details</h2>
+
+		<table border="1">
+			<tr>
+				<td align="right">Id:</td>
+				<td th:text="${dept.did}"></td>
+			</tr>
+			<tr>
+				<td align="right">Department Name:</td>
+				<td th:text="${dept.deptName}"></td>
+			</tr>
+			<tr>
+				<td align="right">Description:</td>
+				<td th:text="${dept.deptDesc}"></td>
+			</tr>
+			<tr>
+				<td align="right">Professors:</td>
+			</tr>
+			<tr th:each="prof: ${profList}">
+				<td></td>
+				<td th:text="${prof.fname} +' '+ ${prof.lname}" />
+			</tr>
+		</table>
+		<br />
+	</div>
+</body>
+</html>

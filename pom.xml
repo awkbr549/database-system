@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.dbms</groupId>
+	<artifactId>UniversityRegistration</artifactId>
+	<version>2.0</version>
+	<packaging>jar</packaging>
+
+	<name>UniversityRegistration</name>
+	<description>Web project for Spring Boot</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.8.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency> <!-- JPA data for Repositories, Entities, Hibernate, etc -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency> <!-- Use MySQL Connetor-J -->
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        
+        <!-- For serving dynamic web content with thymeleaf and such -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        
+        <dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-validator</artifactId>
+	</dependency>
+
+	<!-- Security -->
+<!--    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+	<dependency>
+	    <groupId>org.springframework.ldap</groupId>
+	    <artifactId>spring-ldap-core</artifactId>
+	</dependency>
+	<dependency>
+	    <groupId>org.springframework.security</groupId>
+	    <artifactId>spring-security-ldap</artifactId>
+	</dependency>
+	<dependency>
+	    <groupId>com.unboundid</groupId>
+	    <artifactId>unboundid-ldapsdk</artifactId>
+	</dependency>
+	<dependency>
+	    <groupId>org.springframework.security</groupId>
+	    <artifactId>spring-security-test</artifactId>
+	    <scope>test</scope>
+	</dependency> -->
+    </dependencies>
+	
+	
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>
+
+<beans:bean id="contextSource" class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
+        <beans:constructor-arg index="0" value="${ldap_server}"/>
+</beans:bean>
+
+<beans:bean id="ldapUserSearch" class="org.springframework.security.ldap.search.FilterBasedLdapUserSearch">
+        <beans:constructor-arg index="0" value="${ldap_searchbase}"/>
+        <beans:constructor-arg index="1" value="${ldap_auth_search_filter}"/>
+        <beans:constructor-arg index="2" ref="contextSource" />
+</beans:bean>
+
+<!--<beans:beans xmlns="http://www.springframework.org/schema/security"
+       xmlns:beans="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                           http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
+                           ">
+
+    <http>
+        <intercept-url pattern="/**" requires-channel="https"/>
+        <x509 subject-principal-regex="(.*)"/>
+    </http>
+    
+    <!--<ldap-server id="localLdap" manager-dn="uid=admin,ou=system" manager-password="*******"
+                 url="ldap://localhost:10389/o=U.S. Government,c=US"/>-->
+<!--
+    <ldap-server id="localLdap" manager-dn="uid=admin,ou=system" manager-password="secret"
+     	         url="ldap://localhost:10389/o=U.S.%20Government,c=US"/>
+    <authentication-manager>
+        <authentication-provider>
+            <ldap-user-service id="userService" server-ref="localLdap" user-search-filter="(uid={0})"/>
+        </authentication-provider>
+    </authentication-manager>
+    
+</beans:beans>-->

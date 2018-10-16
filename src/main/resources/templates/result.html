@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Result of Student Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+
+  <body>
+    <h2>Result</h2>
+    <div th:text="'Student ID (assigned): ' + ${student.sid}" />
+    <div th:text="'Date of Birth: ' + ${student.dob}" />
+    <div th:text="'First Name: ' + ${student.fname}" />
+    <div th:text="'Last Name: ' + ${student.lname}" />
+    <div th:text="'Gender: ' + ${student.gender}" />
+    <div th:text="'Email: ' + ${student.email}" />
+    <div th:text="'Street: ' + ${student.street}" />
+    <div th:text="'City: ' + ${student.city}" />
+    <div th:text="'State: ' + ${student.state}" />
+    <div th:text="'Zip: ' + ${student.zip}" />
+    <div th:text="'Residency: ' + ${student.residency}" />
+
+    <br/>
+    
+    <a href="/students/">Submit another student.</a>
+  </body>
+</html>
